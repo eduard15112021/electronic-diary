@@ -13,14 +13,12 @@ public class TimeTable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "quarter")
-    private int quarter;
 
-    @Column(name = "date_first_in_quarter")
-    private LocalDate dateOfFirstInQuarter;
+    @Column(name = "day_of_week")
+    private int dayOfWeek;
 
-    @Column(name = "date_lastin_quarter")
-    private LocalDate dateOfLastInQuarter;
+    @Column(name = "number_of_lesson")
+    private int numberOfLesson;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "subject_id")
@@ -41,28 +39,20 @@ public class TimeTable {
         this.id = idOfTable;
     }
 
-    public int getQuarter() {
-        return quarter;
+    public int getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setQuarter(int quarter) {
-        this.quarter = quarter;
+    public void setDayOfWeek(int dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
-    public LocalDate getDateOfFirstInQuarter() {
-        return dateOfFirstInQuarter;
+    public int getNumberOfLesson() {
+        return numberOfLesson;
     }
 
-    public void setDateOfFirstInQuarter(LocalDate dateOfFirst) {
-        this.dateOfFirstInQuarter = dateOfFirst;
-    }
-
-    public LocalDate getDateOfLastInQuarter() {
-        return dateOfLastInQuarter;
-    }
-
-    public void setDateOfLastInQuarter(LocalDate dateOfLast) {
-        this.dateOfLastInQuarter = dateOfLast;
+    public void setNumberOfLesson(int numberOfLesson) {
+        this.numberOfLesson = numberOfLesson;
     }
 
     public Subject getSubject() {
@@ -85,12 +75,12 @@ public class TimeTable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TimeTable table = (TimeTable) o;
-        return id == table.id && quarter == table.quarter && Objects.equals(dateOfFirstInQuarter, table.dateOfFirstInQuarter) && Objects.equals(dateOfLastInQuarter, table.dateOfLastInQuarter);
+        TimeTable timeTable = (TimeTable) o;
+        return id == timeTable.id && dayOfWeek == timeTable.dayOfWeek && numberOfLesson == timeTable.numberOfLesson && Objects.equals(subject, timeTable.subject) && Objects.equals(grade, timeTable.grade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quarter, dateOfFirstInQuarter, dateOfLastInQuarter);
+        return Objects.hash(id, dayOfWeek, numberOfLesson, subject, grade);
     }
 }
